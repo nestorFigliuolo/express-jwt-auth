@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<head>
+
+</head>
+<body>
+  Login Form
+  <input id="username" type="text" placeholder="usuario">
+  <button onClick="login()">Login</button>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js" integrity="sha512-odNmoc1XJy5x1TMVMdC7EMs3IVdItLPlCeL5vSUPN2llYKMJ2eByTTAIiiuqLg+GdNr9hF6z81p27DArRFKT7A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script>
+    const client = axios.create()
+
+    async function login() {
+      try {
+        const userElem = document.getElementById('username')
+        const response = await client.post('/login', {
+          user: userElem.value
+        }) 
+        //Despues de loggear queda setteada bien la cookie de auth
+        location.href = '/'
+      } catch(err) {
+        console.log(err.response.status, 'Usuario Invalido')
+      }
+    }
+  </script>
+</body>
